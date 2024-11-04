@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Mirror - Time, Date, and Weather</title>
+    <style>
+        /* General styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #111;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Time and date styling */
+        .time {
+            font-size: 64px;
+            font-weight: 300;
+            color: #d1d1d1;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+        }
+        .date {
+            font-size: 28px;
+            margin-top: 10px;
+            color: #b0b0b0;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Weather styling */
+        #weather {
+            margin-top: 30px;
+        }
+        .weather-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .weather-item:last-child {
+            border-bottom: none;
+        }
+        .icon {
+            font-size: 32px;
+            color: #007bff;
+            text-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+        }
+        .description {
+            flex-grow: 1;
+            text-align: left;
+            margin-left: 15px;
+            color: #b0b0b0;
+            font-size: 20px;
+        }
+        .value {
+            font-weight: bold;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Display Time and Date -->
+        <div class="time" id="time"></div>
+        <div class="date" id="date"></div>
+
+        <!-- Display Weather Information -->
+        <h2 id="location">Weather in Nador</h2>
+        <div id="weather">
+            <div class="weather-item">
+                <span class="icon">🌡️</span>
+                <div class="description">
+                    <span class="value">Temperature:</span> <span id="temp">18.1 °C (from 18 to 18.1 °C)</span>
+                </div>
+            </div>
+            <div class="weather-item">
+                <span class="icon">☁️</span>
+                <div class="description">
+                    <span class="value">Weather:</span> <span id="description">Few clouds</span>
+                </div>
+            </div>
+            <div class="weather-item">
+                <span class="icon">🌬️</span>
+                <div class="description">
+                    <span class="value">Wind:</span> <span id="wind">2.57 m/s</span>
+                </div>
+            </div>
+            <div class="weather-item">
+                <span class="icon">☁️</span>
+                <div class="description">
+                    <span class="value">Cloud Coverage:</span> <span id="cloud">20%</span>
+                </div>
+            </div>
+            <div class="weather-item">
+                <span class="icon">🌡️</span>
+                <div class="description">
+                    <span class="value">Pressure:</span> <span id="pressure">1021 hPa</span>
+                </div>
+            </div>
+            <div class="weather-item">
+                <span class="icon">📍</span>
+                <div class="description">
+                    <span class="value">Geo Coordinates:</span> <span id="coords">[35.174, -2.9287]</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Update time and date every second
+        function updateTime() {
+            const now = new Date();
+            const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const timeString = now.toLocaleTimeString([], options);
+            const dateString = now.toLocaleDateString([], { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+            document.getElementById('time').textContent = timeString;
+            document.getElementById('date').textContent = dateString;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
+</body>
+</html>
